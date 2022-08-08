@@ -19,24 +19,29 @@ export default function Index() {
 	}
 
 	const ItemEditor = () => {
+		/**TODO:
+		 * Extract to component directory
+		 * Wire up to write to Prisma
+		 * Fix styling (justify, font(s), etc.?)
+		*/
 		return(
 			<>
 				<form className="border border-dashed border-black w-1/2 p-1 my-5 relative flex-auto flex-wrap">
 					<fieldset>
 						<legend className="text-2xl grow ">Add a line item</legend>
-						<input type="text" placeholder="Item Label"></input>
-						<input type="number" id="amount" step="0.01" placeholder="$00.00" className="w-20"></input>
-						<input type="radio" id="plus" name="sign"></input>
+						<input type="text" name="label" placeholder="Item Label"></input>
+						<input type="number" id="amount" name="amount" step="0.01" placeholder="$00.00" className="w-20"></input>
+						<input type="radio" id="plus" name="sign" value="positive"></input>
 						<label htmlFor="plus">+</label>
-						<input type="radio" id="minus" name="sign"></input>
+						<input type="radio" id="minus" name="sign" value="negative"></input>
 						<label htmlFor="minus">-</label>
 						{/*TODO: Turn the 'sign' selector into a toggle, e.g.: https://flowbite.com/docs/forms/toggle/ */}
 						<br></br>
 						<label htmlFor="startDate" className="font-bold">Start Date </label>
-						<input type="date" id="startDate" className="border border-black rounded"></input>
+						<input type="date" id="startDate" name="startDate" className="border border-black rounded"></input>
 						<br></br>
 						<p className="font-bold">Frequency</p>
-						<span>This occurs every </span><input type="number" step="1" className="w-10 border border-black rounded"></input>
+						<span>This occurs every </span><input type="number" name="freqCount" step="1" className="w-10 border border-black rounded"></input>
 						<select id="freqUnit" name="freqUnit">
 							<option value="days">days</option>
 							<option value="weeks">weeks</option>
@@ -44,8 +49,8 @@ export default function Index() {
 							<option value="years">years</option>
 						</select>
 						<br></br>
-						<input type="number" id="duration" step="1" className="w-10 border border-black rounded"></input>
-						<label htmlFor="duration" className="font-bold">Duration (optional)</label>
+						<input type="number" id="duration" name="duration" step="1" title="Leave blank for a never-ending item" className="w-10 border border-black rounded"></input>
+						<label htmlFor="duration" title="Leave blank for a never-ending item" className="font-bold">Duration (optional)</label>
 						<br></br>
 						<input type="submit" value="Add to budget" className="rounded px-2 py-1 border border-solid border-black bg-green-800"></input>
 					</fieldset>
@@ -56,35 +61,10 @@ export default function Index() {
 	}
 
 	return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+    <div>
       <h1 className="text-5xl">Budget Runner 👟</h1>
 			<StartingBalance />
 			<ItemEditor />
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
     </div>
   );
 }
