@@ -12,7 +12,7 @@ export default function Index() {
 					<h2 className="text-2xl grow ">Set your starting balance</h2>
 					<label htmlFor="balance" className="-mr-2 text-xl">$</label>
 					<input id="balance" name="balance" className="border border-solid border-black mx-2" type="number" step="0.01" defaultValue={"0.00"}></input>
-					<button className="rounded px-2 py-1 border border-solid border-black bg-sky-700">Set</button>
+					<button type="button" className="rounded px-2 py-1 border border-solid border-black bg-sky-700">Set</button>
 				</form>
 			</>
 		)
@@ -21,18 +21,34 @@ export default function Index() {
 	const ItemEditor = () => {
 		return(
 			<>
-				<form className="border border-dashed border-black w-1/2 p-1 my-5 relative flex-initial flex-wrap">
-					<h2 className="text-2xl grow ">Add a line item</h2>
-					<input type="text" placeholder="label"></input>
-					<input type="number" step="0.01" defaultValue={"0.00"}></input>
-					{/* <figure className="flex-1 flex-column justify-center select-none">
-						<div className="flex relative bg-gray-400 self-center after:content-['-'] before:content-['+']">
-							<input id="c" type="checkbox" />
-							<label htmlFor="c" className="absolute m-0 ">
-								<div className="relative bg-green-400 w-1/2"></div>    
-							</label>
-						</div>
-					</figure> */}
+				<form className="border border-dashed border-black w-1/2 p-1 my-5 relative flex-auto flex-wrap">
+					<fieldset>
+						<legend className="text-2xl grow ">Add a line item</legend>
+						<input type="text" placeholder="Item Label"></input>
+						<input type="number" id="amount" step="0.01" placeholder="$00.00" className="w-20"></input>
+						<input type="radio" id="plus" name="sign"></input>
+						<label htmlFor="plus">+</label>
+						<input type="radio" id="minus" name="sign"></input>
+						<label htmlFor="minus">-</label>
+						{/*TODO: Turn the 'sign' selector into a toggle, e.g.: https://flowbite.com/docs/forms/toggle/ */}
+						<br></br>
+						<label htmlFor="startDate" className="font-bold">Start Date </label>
+						<input type="date" id="startDate" className="border border-black rounded"></input>
+						<br></br>
+						<p className="font-bold">Frequency</p>
+						<span>This occurs every </span><input type="number" step="1" className="w-10 border border-black rounded"></input>
+						<select id="freqUnit" name="freqUnit">
+							<option value="days">days</option>
+							<option value="weeks">weeks</option>
+							<option value="months">months</option>
+							<option value="years">years</option>
+						</select>
+						<br></br>
+						<input type="number" id="duration" step="1" className="w-10 border border-black rounded"></input>
+						<label htmlFor="duration" className="font-bold">Duration (optional)</label>
+						<br></br>
+						<input type="submit" value="Add to budget" className="rounded px-2 py-1 border border-solid border-black bg-green-800"></input>
+					</fieldset>
 				</form>
 			</>
 		);
