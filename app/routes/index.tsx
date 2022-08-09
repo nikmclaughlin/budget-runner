@@ -1,102 +1,12 @@
+import { Outlet } from "@remix-run/react";
+
 export default function Index() {
-  
-	const StartingBalance = () => {
-		/**TODO:
-		 * Extract to component directory
-		 * Add state for starting balance (Read/Write from Prisma)
-		 * Fix styling (justify, font(s), etc.?)
-		*/
-		return (
-			<>
-				<form className="border border-dashed border-black w-1/2 p-1 my-5 relative flex-initial flex-wrap">
-					<h2 className="text-2xl grow ">Set your starting balance</h2>
-					<label htmlFor="balance" className="-mr-2 text-xl">$</label>
-					<input id="balance" name="balance" className="border border-solid border-black mx-2" type="number" step="0.01" defaultValue={"0.00"}></input>
-					<button type="button" className="rounded px-2 py-1 border border-solid border-black bg-sky-700">Set</button>
-				</form>
-			</>
-		)
-	}
 
-	const ItemEditor = () => {
-		/**TODO:
-		 * Extract to component directory
-		 * Wire up to write to Prisma
-		 * Fix styling (justify, font(s), etc.?)
-		*/
-		return(
-			<>
-				<form className="border border-dashed border-black w-1/2 p-1 my-5 relative flex-auto flex-wrap">
-					<fieldset>
-						<legend className="text-2xl grow ">Add a line item</legend>
-						<input type="text" name="label" placeholder="Item Label"></input>
-						<input type="number" id="amount" name="amount" step="0.01" placeholder="$00.00" className="w-20"></input>
-						<input type="radio" id="plus" name="sign" value="positive"></input>
-						<label htmlFor="plus">+</label>
-						<input type="radio" id="minus" name="sign" value="negative"></input>
-						<label htmlFor="minus">-</label>
-						{/*TODO: Turn the 'sign' selector into a toggle, e.g.: https://flowbite.com/docs/forms/toggle/ */}
-						<br></br>
-						<label htmlFor="startDate" className="font-bold">Start Date </label>
-						<input type="date" id="startDate" name="startDate" className="border border-black rounded"></input>
-						<br></br>
-						<p className="font-bold">Frequency</p>
-						<span>This occurs every </span><input type="number" name="freqCount" step="1" className="w-10 border border-black rounded"></input>
-						<select id="freqUnit" name="freqUnit">
-							<option value="days">days</option>
-							<option value="weeks">weeks</option>
-							<option value="months">months</option>
-							<option value="years">years</option>
-						</select>
-						<br></br>
-						<input type="number" id="duration" name="duration" step="1" title="Leave blank for a never-ending item" className="w-10 border border-black rounded"></input>
-						<label htmlFor="duration" title="Leave blank for a never-ending item" className="font-bold">Duration (optional)</label>
-						<br></br>
-						<input type="submit" value="Add to budget" className="rounded px-2 py-1 border border-solid border-black bg-green-800"></input>
-					</fieldset>
-				</form>
-			</>
-		);
-
-	}
-
-	const OutputTable = () => {
-		const today = new Date(Date.now());
-		return(
-			<table className="table-fixed border-collapse border border-solid border-black">
-				<thead className="bg-gray-500">
-					<tr>
-						<th className="w-40">Date</th>
-						<th>Item</th>
-						<th>Value</th>
-						<th>Balance</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{today.toLocaleDateString()}</td>
-						<td>Starting Balance</td>
-						<td>+100.00</td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-		);
-	}
-
+	//TODO: conditionally render /login or /$user routes
 	return (
 		<>
-		<h1 className="text-5xl">Budget Runner 👟</h1>
-    <div className="grid grid-cols-2">
-			<div className="col-span-1">
-				<StartingBalance />
-				<ItemEditor />
-			</div>
-			<div className="col-span-1">
-				<h1 className="text-4xl">Budget output</h1>
-				<OutputTable />
-			</div>
-    </div>
+			<h1 className="text-5xl">Budget Runner 👟</h1>
+			<Outlet />
 		</>
   );
 }
